@@ -6,12 +6,13 @@ const args = process.argv.slice(1),
 const createWindow = () => {
   // Create the browser window
   const window = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 600,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false
-    }
+    },
+    resizable: false,
   })
 
   // If run with --serve, loads live browser app, else built app
