@@ -9,7 +9,8 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webSecurity: false
     }
   })
 
@@ -21,7 +22,7 @@ const createWindow = () => {
   }
 
   // Uncomment below to open the DevTools
-  // window.webContents.openDevTools()
+  window.webContents.openDevTools()
 }
 
 // Create window on electron init
