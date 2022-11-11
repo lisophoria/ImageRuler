@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {MousePos} from "../models/mouse-pos";
+import {MousePos} from "../../models/mouse-pos";
 
 @Component({
   selector: 'app-canvas',
@@ -10,31 +10,45 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
   @ViewChild('imageCanvas', {static: true}) imageCanvas!: ElementRef;
   public canvasContext!: CanvasRenderingContext2D;
+  image!: HTMLImageElement;
+  maxWidth = 800;
+  maxHeight = 600;
+  ratio = 1;
 
   constructor() { }
 
   ngOnInit(): void {
+    // temp testing init
+    this.image = new Image();
+    this.image.src = 'file:///home/lisophoria/Pictures/image.jpg';
   }
 
   ngAfterViewInit(): void {
     this.canvasContext = this.imageCanvas.nativeElement.getContext('2d');
     this.setCanvas();
-    this.imageCanvas.nativeElement.addEventListener("click", (evt: MouseEvent) => {
-      let mousePos = this.getMousePosition(evt);
-      console.log(mousePos);
-    });
   }
 
+  // Масштабирование изображение и его отрисовка на холсте
   setCanvas(): void {
-    this.canvasContext.fillStyle = "rgba(1,1,1,1)"
-    this.canvasContext.fillRect(1,1,
-      this.imageCanvas.nativeElement.getAttribute("width"),
-      this.imageCanvas.nativeElement.getAttribute("height"));
+    let that = this;
+    this.image.onload = function() {
+      that.ratio = Math.min((that.maxWidth / that.image.width), (that.maxHeight / that.image.height));
+      that.image.width *= that.ratio;
+      that.image.height *= that.ratio;
+      that.imageCanvas.nativeElement.height = that.image.height;
+      that.imageCanvas.nativeElement.width = that.image.width;
+      that.canvasContext.drawImage(that.image, 0, 0, that.image.width, that.image.height);
+    }
   }
 
-  getMousePosition(evt: MouseEvent): MousePos {
-    let rect = this.imageCanvas.nativeElement.getBoundingClientRect();
-    return {x: evt.clientX - rect.left, y: evt.clientY - rect.top}
+  async getMousePosition(): Promise<MousePos> {
+    return new Promise<MousePos>((resolve) => {
+      this.imageCanvas.nativeElement.addEventListener("click",
+        (evt: MouseEvent) => {
+          let rect = this.imageCanvas.nativeElement.getBoundingClientRect();
+          resolve({x: evt.clientX - rect.left, y: evt.clientY - rect.top});
+        }, {once: true});
+    })
   }
 
 }

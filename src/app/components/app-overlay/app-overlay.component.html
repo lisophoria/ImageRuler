@@ -1,0 +1,19 @@
+<mat-sidenav-container class="app-overlay-container">
+
+  <mat-sidenav mode="side" opened class="sidenav-container"
+               [fixedInViewport]="true">
+    <div class="main-menu">
+
+      <button mat-stroked-button class="custom-button"
+              (click)="newLine()">
+        <span>Create new line</span>
+      </button>
+
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-canvas #canvasComponent></app-canvas>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
