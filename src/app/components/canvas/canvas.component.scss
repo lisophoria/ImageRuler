@@ -1,0 +1,13 @@
+#image-canvas, #line-canvas{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#image-canvas {
+  z-index: 0;
+}
+
+#line-canvas {
+  z-index: 1;
+}

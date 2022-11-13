@@ -19,6 +19,7 @@ export class AppOverlayComponent implements OnInit {
 
   async newLine(): Promise<void> {
     let line: Line = {posX: await this.getPoint(), posY: await this.getPoint()};
+    this.canvas.drawLine(line);
     console.log('newLine: ', line);
   }
 
