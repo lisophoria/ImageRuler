@@ -12,6 +12,50 @@
   padding: 10px;
 }
 
+.input-div {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .custom-button {
   width: 100%;
+}
+
+.custom-input {
+  height: 36px;
+  margin-top: -2.75px;
+  width: 100px;
+}
+
+.bottom-menu {
+  padding: 10px;
+}
+
+.line-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.line-div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+::ng-deep .mat-form-field-outline-start {
+  border-radius: 5px 0 0 5px !important;
+  min-width: 5px !important;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.44em 0 !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  transform: translateY(-1em) scale(.8);
+  width: 133.33333%;
+}
+
+::ng-deep .mat-form-field-outline-end {
+  border-radius: 0 5px 5px 0 !important;
 }

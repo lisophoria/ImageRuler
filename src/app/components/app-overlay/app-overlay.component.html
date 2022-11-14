@@ -9,7 +9,39 @@
         <span>Create new line</span>
       </button>
 
+      <div class="input-div">
+        <div>
+          <mat-form-field appearance="outline" class="custom-input">
+            <input type="number" step="0.01" min="0" matInput placeholder="Multiplier">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button mat-raised-button>
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+      </div>
+
     </div>
+
+    <mat-divider style="margin-top: 5px"></mat-divider>
+
+    <div class="bottom-menu">
+
+      <div class="line-info" *ngIf="line">
+        <div class="line-div">
+          <span>x: {{line.posX.x}}:{{line.posX.y}}</span>
+          <span>y: {{line.posY.x}}:{{line.posY.y}}</span>
+        </div>
+        <div class="line-div">
+          <span>Length:</span>
+          <span>100</span>
+        </div>
+      </div>
+
+    </div>
+
   </mat-sidenav>
 
   <mat-sidenav-content>
