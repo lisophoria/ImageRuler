@@ -1,4 +1,4 @@
-#image-canvas, #line-canvas{
+#image-canvas, #line-canvas, #temp-line-canvas{
   position: absolute;
   top: 0;
   left: 0;
@@ -10,4 +10,8 @@
 
 #line-canvas {
   z-index: 1;
+}
+
+#temp-line-canvas {
+  z-index: 2;
 }
