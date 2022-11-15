@@ -12,7 +12,7 @@
       <div class="input-div">
         <div>
           <mat-form-field appearance="outline" class="custom-input">
-            <input type="number" step="0.01" min="0" matInput placeholder="Multiplier">
+            <input type="number" step="0.01" min="0" matInput placeholder="Multiplier" [(ngModel)]="ratio">
           </mat-form-field>
         </div>
 
@@ -28,18 +28,29 @@
     <mat-divider style="margin-top: 5px"></mat-divider>
 
     <div class="bottom-menu">
-
-      <div class="line-info" *ngIf="line">
-        <div class="line-div">
-          <span>x: {{line.posX.x}}:{{line.posX.y}}</span>
-          <span>y: {{line.posY.x}}:{{line.posY.y}}</span>
+      <cdk-virtual-scroll-viewport itemSize="60" class="line-container">
+        <div *ngFor="let line of lines" class="line-info">
+          <div class="line-div">
+            <span>x: {{line.posX.x}}:{{line.posX.y}}</span>
+            <span>y: {{line.posY.x}}:{{line.posY.y}}</span>
+          </div>
+          <div class="line-div">
+            <span>Length:</span>
+            <span>{{line.length}}</span>
+          </div>
+          <mat-divider></mat-divider>
         </div>
-        <div class="line-div">
-          <span>Length:</span>
-          <span>100</span>
-        </div>
-      </div>
+      </cdk-virtual-scroll-viewport>
 
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="main-menu">
+      <button mat-raised-button color="primary" class="custom-button">
+        <span>Upload image</span>
+      </button>
     </div>
 
   </mat-sidenav>

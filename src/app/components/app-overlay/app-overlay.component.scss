@@ -29,12 +29,17 @@
 }
 
 .bottom-menu {
-  padding: 10px;
+  padding: 0 10px;
+}
+
+.line-container {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 .line-info {
-  display: flex;
-  flex-direction: column;
+  padding: 2px 0;
 }
 
 .line-div {
@@ -58,4 +63,11 @@
 
 ::ng-deep .mat-form-field-outline-end {
   border-radius: 0 5px 5px 0 !important;
+}
+
+// Невидимый скроллбар для line-info
+
+.line-container::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }

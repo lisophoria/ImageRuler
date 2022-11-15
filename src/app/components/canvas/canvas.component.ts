@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MousePos} from "../../models/mouse-pos";
-import {Line} from "../../models/line";
 import {CanvasSize} from "../../models/canvas-size";
+import {LineLength} from "../../models/line-length";
 
 @Component({
   selector: 'app-canvas',
@@ -51,11 +51,13 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     });
   }
 
+  // Инициализация холста с линиями
   setLineCanvas(canvasSize: CanvasSize): void {
     this.lineCanvas.nativeElement.width = canvasSize.width;
     this.lineCanvas.nativeElement.height = canvasSize.height;
   }
 
+  // Получение позиции мыши по клику
   async getMousePosition(): Promise<MousePos> {
     return new Promise<MousePos>((resolve) => {
       this.lineCanvas.nativeElement.addEventListener("click",
@@ -66,7 +68,8 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     })
   }
 
-  drawLine(line: Line): void {
+
+  drawLine(line: LineLength): void {
     this.lineContext.beginPath();
     this.lineContext.moveTo(line.posX.x, line.posX.y);
     this.lineContext.lineWidth = 5;
