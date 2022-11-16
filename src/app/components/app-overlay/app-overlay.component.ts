@@ -31,4 +31,15 @@ export class AppOverlayComponent implements OnInit, AfterViewInit {
     this.lines = [];
   }
 
+  getImage(): void {
+    window.ipcRenderer.invoke('getImage').then((message: any) => {
+      this.newImage(message);
+    })
+  }
+
+  newImage(message: string): void {
+    this.lines = [];
+    this.canvas.initImage(message);
+  }
+
 }

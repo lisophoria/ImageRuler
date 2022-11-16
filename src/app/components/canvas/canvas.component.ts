@@ -17,7 +17,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   @ViewChild('tempLineCanvas', {static: true}) tempLineCanvas!: ElementRef;
   @Input() coefficient!: number;
   public tempLineContext!: CanvasRenderingContext2D;
-  public canvasSize!: CanvasSize;
+  public canvasSize: CanvasSize = {height: 300, width: 300};
   private image!: HTMLImageElement;
   private maxWidth = 800;
   private maxHeight = 600;
@@ -26,15 +26,22 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void {
-    // temp testing init
-    this.image = new Image();
-    this.image.src = 'file:///home/lisophoria/Pictures/image.jpg';
   }
 
   async ngAfterViewInit(): Promise<void> {
     this.canvasContext = this.imageCanvas.nativeElement.getContext('2d');
     this.lineContext = this.lineCanvas.nativeElement.getContext('2d');
     this.tempLineContext = this.tempLineCanvas.nativeElement.getContext('2d');
+  }
+
+  async initImage(image: string): Promise<void> {
+    this.clearContext(this.canvasContext);
+    this.clearContext(this.lineContext);
+    this.clearContext(this.tempLineContext);
+
+    this.image = new Image();
+    this.image.src = `data:image/png;base64,${image}`;
+
     await this.setImageCanvas().then(
       (onfulfilled) => {
         this.setLineCanvas(onfulfilled, this.lineCanvas);
@@ -141,7 +148,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
 
   makeLine(_posX: MousePos, _posY: MousePos): Line {
-    let _length = (Math.sqrt((_posY.x - _posX.x) ** 2 + (_posY.y - _posX.y) ** 2) * this.ratio * this.coefficient).toFixed(2);
+    let _length = (Math.sqrt((_posY.x - _posX.x) ** 2 + (_posY.y - _posX.y) ** 2) / this.ratio * this.coefficient).toFixed(2);
     return {posX: {x: _posX.x, y: _posX.y}, posY: {x: _posY.x, y: _posY.y}, length: _length};
   }
 
