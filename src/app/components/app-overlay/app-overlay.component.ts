@@ -26,4 +26,9 @@ export class AppOverlayComponent implements OnInit, AfterViewInit {
     this.lines.push(line);
   }
 
+  clearConstLines(): void {
+    this.canvas.clearConstLines();
+    this.lines = [];
+  }
+
 }

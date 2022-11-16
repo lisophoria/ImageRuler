@@ -132,6 +132,10 @@ export class CanvasComponent implements OnInit, AfterViewInit {
     this.drawLine(line, this.lineContext);
   }
 
+  clearConstLines(): void {
+    this.clearContext(this.lineContext);
+  }
+
   clearContext(context: CanvasRenderingContext2D): void {
     context.clearRect(0, 0, this.canvasSize.width, this.canvasSize.height);
   }
