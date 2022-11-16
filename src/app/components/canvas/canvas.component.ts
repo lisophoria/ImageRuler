@@ -121,11 +121,36 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   drawLine(line: Line, context: CanvasRenderingContext2D): void {
     context.beginPath();
     context.moveTo(line.posX.x, line.posX.y);
-    context.lineWidth = 5;
+    context.lineWidth = 2;
     context.lineCap = 'round';
     context.lineTo(line.posY.x, line.posY.y);
     context.strokeStyle = "#e91e63";
     context.stroke();
+    this.drawLineLengthText(line, context);
+  }
+
+  drawLineLengthText(line: Line, context: CanvasRenderingContext2D): void {
+    let px = line.posX;
+    let dx = line.posY.x - line.posX.x;
+    let dy = line.posY.y - line.posX.y;
+    let angle = Math.atan2(dy, dx);
+
+    if (angle < -Math.PI/2 || angle > Math.PI/2) {
+      px = line.posY;
+      dx *= -1;
+      dy *= -1;
+      angle -= Math.PI;
+    }
+
+    context.save();
+    context.fillStyle = "#FFF"
+    context.textAlign = "center";
+    context.font = '14px Arial';
+    context.textBaseline = "bottom";
+    context.translate(px.x + dx / 2 - 5 * angle % Math.PI, px.y + dy / 2 - 5);
+    context.rotate(angle)
+    context.fillText(line.length , 0, 0);
+    context.restore();
   }
 
   drawTempLine(line: Line): void {
