@@ -10,7 +10,7 @@ import {Line} from "../../models/line";
 export class AppOverlayComponent implements OnInit, AfterViewInit {
 
   @ViewChild('canvasComponent') private canvas!: CanvasComponent;
-  ratio: number = 1;
+  coefficient: number = 1;
   public lines: Line[] = [];
 
   constructor() { }

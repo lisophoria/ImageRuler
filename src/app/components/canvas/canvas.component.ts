@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {MousePos} from "../../models/mouse-pos";
 import {CanvasSize} from "../../models/canvas-size";
 import {Line} from "../../models/line";
@@ -15,6 +15,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   @ViewChild('lineCanvas', {static: true}) lineCanvas!: ElementRef;
   public lineContext!: CanvasRenderingContext2D;
   @ViewChild('tempLineCanvas', {static: true}) tempLineCanvas!: ElementRef;
+  @Input() coefficient!: number;
   public tempLineContext!: CanvasRenderingContext2D;
   public canvasSize!: CanvasSize;
   private image!: HTMLImageElement;
@@ -136,7 +137,7 @@ export class CanvasComponent implements OnInit, AfterViewInit {
   }
 
   makeLine(_posX: MousePos, _posY: MousePos): Line {
-    let _length = (Math.sqrt((_posY.x - _posX.x) ** 2 + (_posY.y - _posX.y) ** 2) * this.ratio).toFixed(2);
+    let _length = (Math.sqrt((_posY.x - _posX.x) ** 2 + (_posY.y - _posX.y) ** 2) * this.ratio * this.coefficient).toFixed(2);
     return {posX: {x: _posX.x, y: _posX.y}, posY: {x: _posY.x, y: _posY.y}, length: _length};
   }
 

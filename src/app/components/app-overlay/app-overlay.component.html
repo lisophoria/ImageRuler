@@ -12,7 +12,7 @@
       <div class="input-div">
         <div>
           <mat-form-field appearance="outline" class="custom-input">
-            <input type="number" step="0.01" min="0" matInput placeholder="Multiplier" [(ngModel)]="ratio">
+            <input type="number" step="0.01" min="0" matInput placeholder="Multiplier" [(ngModel)]="coefficient">
           </mat-form-field>
         </div>
 
@@ -56,7 +56,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-canvas #canvasComponent></app-canvas>
+    <app-canvas #canvasComponent [coefficient]="coefficient"></app-canvas>
   </mat-sidenav-content>
 
 </mat-sidenav-container>
