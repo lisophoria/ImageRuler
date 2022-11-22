@@ -1,0 +1,62 @@
+<mat-sidenav-container class="app-overlay-container">
+
+  <mat-sidenav mode="side" opened class="sidenav-container"
+               [fixedInViewport]="true">
+    <div class="main-menu">
+
+      <button mat-raised-button color="primary" class="custom-button"
+              (click)="newLine()">
+        <span>Create new line</span>
+      </button>
+
+      <div class="input-div">
+        <div>
+          <mat-form-field appearance="outline" class="custom-input">
+            <input type="number" step="0.01" min="0" matInput placeholder="Multiplier" [(ngModel)]="coefficient">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button mat-raised-button (click)="clearConstLines()">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <mat-divider style="margin-top: 5px"></mat-divider>
+
+    <div class="bottom-menu">
+      <cdk-virtual-scroll-viewport itemSize="60" class="line-container">
+        <div *ngFor="let line of lines" class="line-info">
+          <div class="line-div">
+            <span>x: {{line.posX.x}}:{{line.posX.y}}</span>
+            <span>y: {{line.posY.x}}:{{line.posY.y}}</span>
+          </div>
+          <div class="line-div">
+            <span>Length:</span>
+            <span>{{line.length}}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </cdk-virtual-scroll-viewport>
+
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="main-menu">
+      <button mat-raised-button color="primary" class="custom-button" (click)="getImage()">
+        <span>Upload image</span>
+      </button>
+    </div>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-canvas #canvasComponent [coefficient]="coefficient"></app-canvas>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
