@@ -29,7 +29,7 @@ const createWindow = () => {
   }
 
   // Uncomment below to open the DevTools
-  window.webContents.openDevTools()
+  // window.webContents.openDevTools()
 
 }
 
